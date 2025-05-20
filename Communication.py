@@ -1,4 +1,5 @@
 import Twilio_Setup
+import user_input
 
 
 def send_message(message_text):
@@ -16,15 +17,11 @@ def get_new_message():
 
 
 def main():
-    #DENNIS.generate_greeting_response()
-    view_history = input("Do you want to read the Message history - (y/n)? ")
-    if view_history == "y":
-        conversation = Twilio_Setup.identify_conversation().messages.list()
-        for message in conversation:
-            print(f"{message.author} send the message - {message.body}")
-    print()
+    get_new_message()
+    send_message(user_input.generate_greeting_response())
     send_message("Lets Make a Plan together!")
-    #vacation_data_dict = DENNIS.ask_user_questions()
+    vacation_data_dict = user_input.ask_user_questions()
+    print(vacation_data_dict)
     send_message("We will process your answer and provide you with the best Holiday Package in the next Step")
 
 

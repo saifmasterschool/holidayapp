@@ -7,7 +7,7 @@ def is_valid_input(user_input):
 def generate_greeting_response():
     return (
         "Hello! Welcome to the smart holiday App!\n"
-        "We offer the best holiday packages worldwide!"
+        "We offer the best holiday packages worldwide!\n"
     )
 
 
@@ -39,35 +39,36 @@ def get_currency_by_location(location):
     return CURRENCY_RATES.get(location, ("USD", 1.0))
 
 def ask_user_questions():
-    Communication.send_message("Server: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\nUser: ")
-    trip_type = Communication.get_new_message().body
-
-
-
-    while not validate_user_selection(trip_type.lower()):
-        trip_type = input("Server: Invalid choice. Please enter 1, 2, 3, or trip type (adventure, culture, relaxing):\nUser: ")
-
-    start_point = input("Server: What is your starting point?\nUser: ")
-    destination = input("Server: What is your destination?\nUser: ")
-    num_people = input("Server: How many people traveling?\nUser:")
-    travel_date = input("Server: When do you want to travel? (Day, Month, Year)\nUser: ")
-    prices = input("Server: What is your price range?\nUser: ")
-    too_expensive = input("Server: Are the prices too expensive for you? (yes/no)\nUser: ")
-    budget = input("Server: What is your budget?\nUser: ")
-
-    currency,rate = get_currency_by_location(start_point)
+    Communication.send_message("Server: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\n ")
+    type = Communication.get_new_message().body
+    Communication.send_message("Server: When do you want to start? (DD.MM.YYYY) ")
+    start_date = Communication.get_new_message().body
+    Communication.send_message("Server: Until when should your journey go? (DD.MM.YYYY) ")
+    end_date = Communication.get_new_message().body
+    Communication.send_message("Server: Whats your Origin City? ")
+    origin = Communication.get_new_message().body
+    #while not validate_user_selection(trip_type.lower()):
+    #    trip_type = input("Server: Invalid choice. Please enter 1, 2, 3, or trip type (adventure, culture, relaxing):\nUser: ")
+    #start_point = input("Server: What is your starting point?\nUser: ")
+    #destination = input("Server: What is your destination?\nUser: ")
+    #num_people = input("Server: How many people traveling?\nUser:")
+    #travel_date = input("Server: When do you want to travel? (Day, Month, Year)\nUser: ")
+    #prices = input("Server: What is your price range?\nUser: ")
+    #too_expensive = input("Server: Are the prices too expensive for you? (yes/no)\nUser: ")
+    #budget = input("Server: What is your budget?\nUser: ")
+    #currency,rate = get_currency_by_location(start_point)
 
     return{
-        "Trip type": trip_type,
-        "Starting point": start_point,
-        "Deetination": destination,
-        "Number of traveler": num_people,
-        "Travel date":travel_date,
-        "Price range": f"{prices} {currency}",
-        "Currency used": currency,
-        "Exchange rate": rate,
-        "Too expensive": too_expensive,
-        "Budget": f"{budget} {currency}"
+        "type": type,
+        "start_date": start_date,
+        "end_date": end_date,
+        "origin": origin,
+        #"Travel date":travel_date,
+        #"Price range": f"{prices} {currency}",
+        #"Currency used": currency,
+        #"Exchange rate": rate,
+        #"Too expensive": too_expensive,
+        #"Budget": f"{budget} {currency}"
 
     }
 
