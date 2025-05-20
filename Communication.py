@@ -19,7 +19,7 @@ def get_new_message():
 def main():
     get_new_message()
     send_message(user_input.generate_greeting_response())
-    send_message("Lets Make a Plan together!")
+    send_message("Lets Make a Plan together!\nThe next available Agent will get in touch with you!\n")
     vacation_data_dict = user_input.ask_user_questions()
     print(vacation_data_dict)
     send_message("We will process your answer and provide you with the best Holiday Package in the next Step")

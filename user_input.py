@@ -39,13 +39,13 @@ def get_currency_by_location(location):
     return CURRENCY_RATES.get(location, ("USD", 1.0))
 
 def ask_user_questions():
-    Communication.send_message("Server: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\n ")
+    Communication.send_message("Holiday Agent: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\n ")
     type = Communication.get_new_message().body
-    Communication.send_message("Server: When do you want to start? (DD.MM.YYYY) ")
+    Communication.send_message("Holiday Agent: When do you want your journey to start? (DD.MM.YYYY) ")
     start_date = Communication.get_new_message().body
-    Communication.send_message("Server: Until when should your journey go? (DD.MM.YYYY) ")
+    Communication.send_message("Holiday Agent: Until when should your journey go? (DD.MM.YYYY) ")
     end_date = Communication.get_new_message().body
-    Communication.send_message("Server: Whats your Origin City? ")
+    Communication.send_message("Holiday Agent: Whats your Origin City? ")
     origin = Communication.get_new_message().body
     #while not validate_user_selection(trip_type.lower()):
     #    trip_type = input("Server: Invalid choice. Please enter 1, 2, 3, or trip type (adventure, culture, relaxing):\nUser: ")
