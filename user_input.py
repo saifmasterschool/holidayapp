@@ -53,18 +53,19 @@ def ask_user_questions():
 
     currency,rate = get_currency_by_location(start_point)
 
-    print("\nServer: Thank you! This is your holiday info:")
-    print(f"Trip type:{trip_type}")
-    print(f"Starting point: {start_point}")
-    print(f"Deetination: {destination}")
-    print(f"Number of traveler: {num_people}")
-    print(f"Travel date:{travel_date}")
-    print(f"Price range: {prices} {currency}")
-    print(f"Currency used: {currency}")
-    print(f"Too expensive:{too_expensive}")
-    print(f"Budget: {budget}")
+    return{
+        "Trip type": trip_type,
+        "Starting point": start_point,
+        "Deetination": destination,
+        "Number of traveler": num_people,
+        "Travel date":travel_date,
+        "Price range": f"{prices} {currency}",
+        "Currency used": currency,
+        "Exchange rate": rate,
+        "Too expensive": too_expensive,
+        "Budget": f"{budget} {currency}"
 
-
+    }
 
 def process_user_message(user_input):
     if not is_valid_input(user_input):
