@@ -15,6 +15,3 @@ def build_payload():
         "origin": user_input.get("origin", "Berlin"),
     }
     return payload
-
-mock_payload = build_payload()
-print(mock_payload)
