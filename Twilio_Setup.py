@@ -15,11 +15,12 @@ def init_twilio_client():
 
 
 def identify_conversation():
+    """loops through all conversations and returns the conversation with your Phone number"""
     client = init_twilio_client()
     for conv in client.conversations.list():
         participants = conv.participants.list()
         for part in participants:
-            if part.messaging_binding and part.messaging_binding["address"] == "whatsapp:+4915128847093":
+            if part.messaging_binding and part.messaging_binding["address"] == f"whatsapp:{os.getenv("PHONE_NUMBER")}":
                 return conv
     return None
 
