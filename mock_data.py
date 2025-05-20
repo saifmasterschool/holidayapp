@@ -9,9 +9,9 @@ def build_payload():
         "origin": "Berlin"
     }
     payload = {
-        "travel_type": user_input.get("type", "relaxing"),
-        "start_date": user_input.get("start_date", "01.06.2025"),
-        "end_date": user_input.get("end_date", "10.06.2025"),
-        "origin": user_input.get("origin", "Berlin"),
+        "travel_type": user_input["type"],
+        "start_date": user_input["start_date"],
+        "end_date": user_input["end_date"],
+        "origin": user_input["origin"]
     }
     return payload

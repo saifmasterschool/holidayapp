@@ -8,9 +8,6 @@ load_dotenv()  # Loads .env file variables
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def get_openai_response(payload):
-    models = client.models.list()
-    for model in models.data:
-        print(model.id)
     prompt = (
         f"You are a travel expert. Recommend one ideal destination for a {payload['travel_type']} vacation "
         f"starting from {payload['origin']}, between {payload['start_date']} and {payload['end_date']}. "
@@ -24,10 +21,8 @@ def get_openai_response(payload):
     )
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}]
     )
 
     return response.choices[0].message.content
-
-print(get_openai_response(build_payload()))
