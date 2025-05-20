@@ -1,3 +1,5 @@
+import Communication
+
 def is_valid_input(user_input):
    return user_input.strip().lower() == "hello smart holiday app"
 
@@ -37,7 +39,9 @@ def get_currency_by_location(location):
     return CURRENCY_RATES.get(location, ("USD", 1.0))
 
 def ask_user_questions():
-    trip_type = input("Server: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\nUser: ")
+    Communication.send_message("Server: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\nUser: ")
+    trip_type = Communication.get_new_message().body
+
 
 
     while not validate_user_selection(trip_type.lower()):
