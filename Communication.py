@@ -131,8 +131,15 @@ def main():
         "An agent will get in touch with you shortly.\n"
         "In the meantime, we'll process your answers and suggest the perfect holiday package! 🌴"
     )
-    vacation_data_dict = user_input.ask_user_questions()
-    get_holiday_data(vacation_data_dict)
+    while True:
+        vacation_data_dict = user_input.ask_user_questions()
+        get_holiday_data(vacation_data_dict)
+        send_message("Do want to make another Plan? (Y/N)")
+        answer = get_new_message().body
+        if answer == "Y":
+            pass
+        if answer == "N":
+            exit()
 
 
 if __name__ == "__main__":

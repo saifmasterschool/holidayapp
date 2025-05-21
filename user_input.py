@@ -53,7 +53,7 @@ def ask_user_questions():
             Communication.send_message("Holiday Agent: What type of trip do you want?\n 1) Adventure\n 2) Culture\n 3) Relaxing\n ")
             type = Communication.get_new_message().body
             if not validate_user_selection(clean_user_input(type)):
-                 Communication.send_message("Sry your answer was not what we expected, please try again.")
+                 Communication.send_message("❌ Sry your answer was not what we expected, please try again.")
             if validate_user_selection(clean_user_input(type)):
                 break
         except TypeError:
@@ -63,22 +63,22 @@ def ask_user_questions():
             Communication.send_message("Holiday Agent: When do you want your journey to start? (DD.MM.YYYY) ")
             start_date = Communication.get_new_message().body
             if not validate_user_date(start_date):
-                Communication.send_message("Sry your answer was not what we expected, please try again.")
+                Communication.send_message("❌ Sry your answer was not what we expected, please try again.")
             if validate_user_date(start_date):
                 break
         except ValueError:
-            Communication.send_message("Sry your answer was not what we expected, please try again.")
+            Communication.send_message("❌ Sry your answer was not what we expected, please try again.")
             pass
     while True:
         try:
             Communication.send_message("Holiday Agent: Until when should your journey go? (DD.MM.YYYY) ")
             end_date = Communication.get_new_message().body
             if not validate_user_date(end_date):
-                Communication.send_message("Sry your answer was not what we expected, please try again.")
+                Communication.send_message("❌ Sry your answer was not what we expected, please try again.")
             if validate_user_date(end_date):
                 break
         except ValueError:
-            Communication.send_message("Sry your answer was not what we expected, please try again.")
+            Communication.send_message("❌ Sry your answer was not what we expected, please try again.")
             pass
     # while True:
     Communication.send_message("Holiday Agent: Whats your Origin City? ")
