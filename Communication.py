@@ -9,7 +9,17 @@ from open_ia import get_openai_response
 from weather import get_weather_forecast
 
 load_dotenv()
-
+WEATHER_EMOJIS = {
+    "Sunny": "☀️",
+    "Clear": "☀️",
+    "Partly Cloudy": "🌤️",
+    "Cloudy": "☁️",
+    "Rain": "🌧️",
+    "Thunderstorm": "⛈️",
+    "Snow": "❄️",
+    "Windy": "🌬️",
+    "Fog": "🌫️",
+}
 
 def extract_trip_details(ai_response: str):
     try:
@@ -41,12 +51,9 @@ def get_holiday_data(data):
         ai_response = get_openai_response(payload)
         location, location_description, location_activities = extract_trip_details(ai_response)
 
-        send_message(f"\nRecommended Destination: {location}")
-        send_message(f"Why it's a good fit: {location_description}")
-        send_message("Top 3 Activities:")
-        # print(f"\nRecommended Destination: {location}")
-        # print(f"Why it's a good fit: {location_description}")
-        # print("Top 3 Activities:")
+        send_message(f"*🌍 Recommended Destination:* *{location}*")
+        send_message(f"*✨ Why it's a good fit:*\n{location_description}")
+        send_message("*🎯 Top 3 Activities:*")
         for i, act in enumerate(location_activities, start=1):
             send_message(f"   {i}. {act}")
 
@@ -56,7 +63,6 @@ def get_holiday_data(data):
 
         forecast_limit = 16
         delta_days = (start_date - today).days
-        trip_duration = (end_date - start_date).days + 1
 
         if delta_days > forecast_limit:
             send_message(
@@ -69,22 +75,27 @@ def get_holiday_data(data):
 
             days_to_fetch = (available_end - today).days
             send_message(
-                f"\nFetching weather forecast for {location} (only available from {forecast_start.date()} to {forecast_end.date()})...")
+                f"\n🌤️ *Fetching weather forecast for {location}* "
+                f"(only available from *{forecast_start.date()}* to *{forecast_end.date()}*)..."
+            )
 
             weather = get_weather_forecast(location, days=days_to_fetch)
 
             if weather:
-                send_message(f"\nWeather Forecast for {weather['location']}, {weather['country']}:")
+                send_message(f"*📍 Location:* {weather['location']}, {weather['country']}")
+                send_message("*Weather Forecast:*")
                 for day in weather["forecast"]:
                     forecast_date = datetime.strptime(day["date"], "%Y-%m-%d")
                     if forecast_start <= forecast_date <= forecast_end:
+                        emoji = WEATHER_EMOJIS.get(day["condition"], "🌦️")
                         send_message(
-                            f"{day['date']}: {day['condition']} | "
-                            f"{day['min_temp']}°C - {day['max_temp']}°C | "
-                            f"Rain chance: {day['rain_chance']}%"
+                            f"*{emoji}  {day['date']}*:\n"
+                            f"  • *Condition:* {day['condition']}\n"
+                            f"  • *Temp:* {day['min_temp']}°C - {day['max_temp']}°C\n"
+                            f"  • *Rain Chance:* {day['rain_chance']}%"
                         )
             else:
-                send_message("Could not retrieve weather data.")
+                send_message("❌ Could not retrieve weather data.")
 
     except Exception as e:
         send_message(f"\n Error: {e}")
@@ -105,14 +116,15 @@ def get_new_message():
 
 
 def main():
-    get_new_message() #Waiting till a message comes inn
-    send_message(user_input.generate_greeting_response())
-    send_message("Lets Make a Plan together!\nThe next available Agent will get in touch with you!\n")
-    send_message("We will process your answer and provide you with the best Holiday Package in the next Step")
+    get_new_message()
+    send_message("*👋 Hello!* " + user_input.generate_greeting_response())
+    send_message(
+        "*🧳 Let's Make a Plan Together!*\n"
+        "An agent will get in touch with you shortly.\n"
+        "In the meantime, we'll process your answers and suggest the perfect holiday package! 🌴"
+    )
     vacation_data_dict = user_input.ask_user_questions()
     get_holiday_data(vacation_data_dict)
-
-
 
 
 if __name__ == "__main__":
