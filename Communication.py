@@ -10,16 +10,23 @@ from weather import get_weather_forecast
 
 load_dotenv()
 WEATHER_EMOJIS = {
-    "Sunny": "☀️",
-    "Clear": "☀️",
-    "Partly Cloudy": "🌤️",
-    "Cloudy": "☁️",
-    "Rain": "🌧️",
-    "Thunderstorm": "⛈️",
-    "Snow": "❄️",
-    "Windy": "🌬️",
-    "Fog": "🌫️",
+    "sun": "☀️",
+    "clear": "☀️",
+    "partly cloudy": "🌤️",
+    "cloud": "☁️",
+    "rain": "🌧️",
+    "thunder": "⛈️",
+    "snow": "❄️",
+    "wind": "🌬️",
+    "fog": "🌫️",
 }
+
+def get_weather_emoji(condition: str) -> str:
+    condition_lower = condition.lower()
+    for keyword, emoji in WEATHER_EMOJIS.items():
+        if keyword in condition_lower:
+            return emoji
+    return "🌦️"
 
 def extract_trip_details(ai_response: str):
     try:
@@ -87,7 +94,8 @@ def get_holiday_data(data):
                 for day in weather["forecast"]:
                     forecast_date = datetime.strptime(day["date"], "%Y-%m-%d")
                     if forecast_start <= forecast_date <= forecast_end:
-                        emoji = WEATHER_EMOJIS.get(day["condition"], "🌦️")
+                        print(day["condition"])
+                        emoji = get_weather_emoji(day["condition"])
                         send_message(
                             f"*{emoji}  {day['date']}*:\n"
                             f"  • *Condition:* {day['condition']}\n"
