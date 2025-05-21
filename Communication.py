@@ -82,7 +82,7 @@ def get_holiday_data(data):
             weather = get_weather_forecast(location, days=days_to_fetch)
 
             if weather:
-                send_message(f"*📍 Location:* {weather['location']}, {weather['country']}")
+                send_message(f"*📍 Location:* {location}")
                 send_message("*Weather Forecast:*")
                 for day in weather["forecast"]:
                     forecast_date = datetime.strptime(day["date"], "%Y-%m-%d")

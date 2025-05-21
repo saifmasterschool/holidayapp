@@ -80,12 +80,12 @@ def ask_user_questions():
         except ValueError:
             Communication.send_message("Sry your answer was not what we expected, please try again.")
             pass
-    while True:
-        Communication.send_message("Holiday Agent: Whats your Origin City? ")
-        origin = Communication.get_new_message().body
-        if origin is str:
-            break
-        Communication.send_message("Sry your answer was not what we expected, please try again.")
+    # while True:
+    Communication.send_message("Holiday Agent: Whats your Origin City? ")
+    origin = Communication.get_new_message().body
+        # if origin is str:
+           # break
+        # Communication.send_message("Sry your answer was not what we expected, please try again.")
     #while not validate_user_selection(trip_type.lower()):
     #    trip_type = input("Server: Invalid choice. Please enter 1, 2, 3, or trip type (adventure, culture, relaxing):\nUser: ")
     #start_point = input("Server: What is your starting point?\nUser: ")
