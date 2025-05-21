@@ -94,7 +94,6 @@ def get_holiday_data(data):
                 for day in weather["forecast"]:
                     forecast_date = datetime.strptime(day["date"], "%Y-%m-%d")
                     if forecast_start <= forecast_date <= forecast_end:
-                        print(day["condition"])
                         emoji = get_weather_emoji(day["condition"])
                         send_message(
                             f"*{emoji}  {day['date']}*:\n"
