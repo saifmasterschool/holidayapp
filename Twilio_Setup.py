@@ -20,7 +20,7 @@ def identify_conversation():
     for conv in client.conversations.list():
         participants = conv.participants.list()
         for part in participants:
-            if part.messaging_binding and part.messaging_binding["address"] == f"whatsapp:{os.getenv("PHONE_NUMBER")}":
+            if part.messaging_binding and part.messaging_binding["address"] == f"whatsapp:{os.getenv('PHONE_NUMBER')}":
                 return conv
     return None
 
